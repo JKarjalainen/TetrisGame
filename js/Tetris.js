@@ -46,6 +46,11 @@ class Tetris {
         matrix.forEach((row, y) => {
             row.forEach((value, x) => {
                 if (value !== 0) {
+                    // draw outline on the blocks
+                    this.context.strokeStyle = "#000";
+                    this.context.lineWidth = 0.05;
+                    this.context.strokeRect(x + offset.x, y + offset.y, 1, 1);
+
                     this.context.fillStyle = this.colors[value];
                     this.context.fillRect(x + offset.x, y + offset.y, 1, 1);
                 }
