@@ -11,6 +11,8 @@ class Player {
 
         this.pos = { x: 0, y: 0 };
         this.matrix = null;
+        this.hold = null;
+        this.alreadyHold = false;
         this.score = 0;
 
         this.reset();
@@ -101,6 +103,7 @@ class Player {
             this.reset();
             this.score += this.arena.sweep();
             updateScore();
+            this.alreadyHold = false;
         }
         this.dropCounter = 0;
     }
@@ -114,6 +117,7 @@ class Player {
         this.reset();
         this.score += this.arena.sweep();
         updateScore();
+        this.alreadyHold = false;
     }
 
     rotate(dir) {
@@ -128,6 +132,24 @@ class Player {
                 this.pos.x = pos;
                 return;
             }
+        }
+    }
+
+    holdPiece() {
+        if (this.alreadyHold) {
+            return;
+        }
+
+        if (this.hold === null) {
+            this.hold = this.matrix;
+            this.reset();
+            this.alreadyHold = true;
+        } else {
+            let temp = this.matrix;
+            this.matrix = this.hold;
+            this.hold = temp;
+            this.pos.y = 0;
+            this.alreadyHold = true;
         }
     }
 

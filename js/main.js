@@ -15,6 +15,8 @@ document.addEventListener("keydown", (event) => {
         tetris.player.rotate(1);
     } else if (event.keyCode === 32) {
         tetris.player.hardDrop();
+    } else if (event.keyCode === 67) {
+        tetris.player.holdPiece();
     }
 });
 
